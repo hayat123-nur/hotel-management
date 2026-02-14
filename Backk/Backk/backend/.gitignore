@@ -33,3 +33,6 @@ tmp/
 temp/
 .history/
 
+# Helper files
+proto_methods.txt
+
