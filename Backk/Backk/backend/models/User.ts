@@ -8,8 +8,6 @@ export interface IUser extends Document {
   _id: mongoose.Types.ObjectId;
   name: string;
   email: string;
-  // Optional legacy university ID (kept for compatibility)
-  universityId?: string;
   // Contact & profile fields for hotel project
   contactNumber?: string;
   address?: {
@@ -50,13 +48,6 @@ const userSchema = new Schema<IUser>(
         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
         "Please add a valid email",
       ],
-    },
-    // legacy universityId (optional)
-    universityId: {
-      type: String,
-      required: false,
-      unique: false,
-      trim: true,
     },
     // Contact fields for hotel users
     contactNumber: {

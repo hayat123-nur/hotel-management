@@ -3,9 +3,9 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { IDocument } from "../models/Document";
 import { truncateText } from "../utils/textProcessing";
 
-// Model names
-const VOYAGE_MODEL = "voyage-3-large"; 
-const GEMINI_MODEL = "gemini-2.5-flash"; // User requested version
+// Model names from env with fallbacks
+const VOYAGE_MODEL = process.env.VOYAGE_MODEL || "voyage-3-large"; 
+const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash"; 
 
 // Initialize Google Gemini AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
@@ -77,7 +77,7 @@ Keep answers short (max 5 lines).
 
     const fullPrompt = `${systemPrompt}${contextText}\n\nUser Question: ${question}\n\nHotel Assistant Response:`;
     
-    // Fix: Added the mandatory role property to the content object to avoid TS error
+    // Use correct contents structure with role
     const result = await model.generateContent({
       contents: [{ role: "user", parts: [{ text: fullPrompt }] }]
     });

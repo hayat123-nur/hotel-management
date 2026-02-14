@@ -31,17 +31,6 @@ router.post(
       .isEmail()
       .withMessage("Please provide a valid email")
       .normalizeEmail(),
-    body("universityId")
-      .trim()
-      .customSanitizer((val: string) => {
-        if (!val || typeof val !== "string") return val;
-        // remove all internal spaces and normalize case
-        return val.replace(/\s+/g, "").toLowerCase();
-      })
-      .notEmpty()
-      .withMessage("University ID is required")
-      .isLength({ min: 1 })
-      .withMessage("Please provide a valid university ID"),
     body("password")
       .notEmpty()
       .withMessage("Password is required")
