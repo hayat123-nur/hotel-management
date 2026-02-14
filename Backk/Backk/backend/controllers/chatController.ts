@@ -29,7 +29,7 @@ const VOYAGE_MODEL = "voyage-3-large"; // 1024 dimensions
 const GEMINI_MODEL = "gemini-2.0-flash";
 
 /**
- * Generate text embeddings using Google Gemini text-embedding-004 model
+ * Generate text embeddings using Voyage AI voyage-3-large model
  * @param {string} text - Text to embed
  * @returns {Promise<number[] | null>} Embedding vector (1536 dimensions)
  */
@@ -40,19 +40,22 @@ const generateEmbedding = async (text: string): Promise<number[] | null> => {
     console.log(`🔢 Generating embedding with Gemini text-embedding-004...`);
     console.log("   Text preview:", truncateText(text, 80));
 
-    // Get embedding model
-    const model = genAI.getGenerativeModel({ model: "text-embedding-004" });
+    const response: AxiosResponse<VoyageEmbeddingResponse> = await axios.post(
+      "https://api.voyageai.com/v1/embeddings",
+      {
+        input: text,
+        model: VOYAGE_MODEL,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.VOYAGE_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+      },
+    );
 
-    // Generate embedding with specific output dimensionality (1536)
-    const result = await model.embedContent({
-      content: { parts: [{ text }] },
-      taskType: "retrieval_document" as any,
-      outputDimensionality: 1536,
-    });
-
-    const embedding = result.embedding.values;
-
-    if (embedding && embedding.length > 0) {
+    if (response.data && response.data.data && response.data.data[0]) {
+      const embedding = response.data.data[0].embedding;
       console.log(
         `✅ Embedding generated successfully (${embedding.length} dimensions)`,
       );
