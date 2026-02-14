@@ -8,7 +8,6 @@ const Register: React.FC = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    universityId: "",
     password: "",
     confirmPassword: "",
   });
@@ -30,14 +29,9 @@ const Register: React.FC = () => {
 
     setIsLoading(true);
     try {
-      // sanitize universityId client-side to match backend expectation
-      const sanitizedUniversityId = formData.universityId
-        ? formData.universityId.replace(/\s+/g, "").toLowerCase()
-        : formData.universityId;
       const data = await signupUser({
         name: formData.name,
         email: formData.email,
-        universityId: sanitizedUniversityId,
         password: formData.password,
       });
 
@@ -113,23 +107,6 @@ const Register: React.FC = () => {
             </div>
           </div>
 
-          <div className="space-y-3">
-            <label className="text-[10px] font-black text-gourmet-charcoal/40 uppercase tracking-[0.2em] ml-2">
-              University ID (e.g., ugr/12345/16)
-            </label>
-            <div className="relative">
-              <Hash className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-gourmet-amber/50" />
-              <input
-                type="text"
-                name="universityId"
-                value={formData.universityId}
-                onChange={handleChange}
-                placeholder="ugr/00000/00"
-                required
-                className="w-full bg-gourmet-cream border border-gourmet-amber/10 rounded-2xl py-5 pl-14 pr-5 text-sm focus:outline-none focus:ring-2 focus:ring-gourmet-amber transition-all uppercase tracking-widest font-black"
-              />
-            </div>
-          </div>
 
           <div className="space-y-3">
             <label className="text-[10px] font-black text-gourmet-charcoal/40 uppercase tracking-[0.2em] ml-2">

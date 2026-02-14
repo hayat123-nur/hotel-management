@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Star, MapPin, ArrowRight, UtensilsCrossed, Info } from 'lucide-react';
+import { Star, MapPin, ArrowRight, UtensilsCrossed, Info, Hotel } from 'lucide-react';
 import { MOCK_RESTAURANTS, MOCK_DISHES } from '../constants';
 
 const Home: React.FC = () => {
@@ -11,7 +11,7 @@ const Home: React.FC = () => {
       <section className="relative h-[90vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src="https://picsum.photos/seed/adama-gourmet/1920/1080" 
+            src="/image copy 2.png" 
             alt="Adama Fine Dining" 
             className="w-full h-full object-cover"
           />
@@ -24,7 +24,7 @@ const Home: React.FC = () => {
               Taste of Adama
             </h1>
             <p className="text-lg md:text-xl text-gourmet-cream/80 mb-12 leading-relaxed max-w-xl serif italic font-light">
-              Embark on a curated journey through the city's most prestigious culinary destinations, where tradition meets contemporary elegance.
+              Experience the vibrant spirit of Adama, Ethiopia's bustling crossroads of culture and flavor. From luxury lakeside getaways to the city's most prestigious culinary destinations.
             </p>
             <div className="flex flex-wrap gap-6">
               <button 
@@ -110,7 +110,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* Special Dishes */}
-      <section className="py-32 bg-white overflow-hidden relative">
+      {/* <section className="py-32 bg-white overflow-hidden relative">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-gourmet-amber/5 -skew-x-12 translate-x-1/2"></div>
         <div className="max-w-7xl mx-auto px-4 relative">
           <div className="text-center mb-24">
@@ -135,7 +135,7 @@ const Home: React.FC = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Call to Action Section */}
       <section className="py-32 bg-gourmet-cream">
@@ -146,12 +146,12 @@ const Home: React.FC = () => {
             
             <div className="relative z-10 max-w-3xl">
               <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-md px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-10 border border-white/10 text-gourmet-amber">
-                <UtensilsCrossed className="w-4 h-4" />
-                Culinary Consultation
+                <Hotel className="w-4 h-4" />
+                Sanctuary Selection
               </div>
-              <h2 className="text-5xl md:text-7xl font-black mb-10 leading-none serif tracking-tight">Your Next Culinary Masterpiece Awaits</h2>
+              <h2 className="text-5xl md:text-7xl font-black mb-10 leading-none serif tracking-tight">Your Exquisite Sanctuary Awaits</h2>
               <p className="text-xl text-gourmet-cream/60 mb-14 serif italic font-light">
-                Our AI-driven concierge, <span className="text-gourmet-amber">"The Epicurean,"</span> possesses intimate knowledge of the city's finest tables. Seek guidance on pairings, ambiance, or hidden gems.
+                Our AI-driven concierge, <span className="text-gourmet-amber">"The Adama Guide,"</span> possesses intimate knowledge of the city's finest hotels and hidden culinary gems. Whether you're a weary traveler or a local seeker of luxury, we help you find perfection.
               </p>
               <div className="flex flex-wrap justify-center gap-6">
                 <button 
@@ -180,7 +180,7 @@ const Home: React.FC = () => {
               <span className="text-3xl font-black serif tracking-tight">Food <span className="text-gourmet-amber">Explorer</span></span>
             </div>
             <p className="max-w-md leading-relaxed serif italic text-lg opacity-60">
-              Curating exceptional culinary experiences by bridging the gap between time-honored traditions and modern gastronomic innovation in Adama.
+              Curating exceptional hospitality and dining experiences in the heart of Adama, where Ethiopian warmth meets world-class service.
             </p>
           </div>
           <div>

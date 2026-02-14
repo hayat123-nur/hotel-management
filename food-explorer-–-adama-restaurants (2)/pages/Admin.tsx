@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Upload, Plus, Trash2, Edit3, FileText, Database, Settings, ShieldCheck, Search, Image as ImageIcon, MapPin, Utensils, Loader2 } from 'lucide-react';
+import { Upload, Plus, Trash2, Edit3, FileText, Database, Settings, ShieldCheck, Search, Image as ImageIcon, MapPin, Utensils, Loader2, LogOut } from 'lucide-react';
 import { getDocuments, uploadDocument, deleteDocument } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,6 +12,12 @@ const Admin: React.FC = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('foodToken');
   const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+  const handleLogout = () => {
+    localStorage.removeItem('foodToken');
+    localStorage.removeItem('user');
+    navigate('/');
+  };
 
   // Check if user is admin/staff
   useEffect(() => {
@@ -92,11 +98,11 @@ const Admin: React.FC = () => {
           </div>
           <div>
             <span className="block font-black text-xl text-white serif tracking-tight">Admin</span>
-            <span className="block text-[10px] font-black uppercase tracking-[0.3em] text-gourmet-amber">Gourmet Central</span>
+            <span className="block text-[10px] font-black uppercase tracking-[0.3em] text-gourmet-amber"></span>
           </div>
         </div>
 
-        <nav className="flex-1 p-6 space-y-3 relative">
+        {/* <nav className="flex-1 p-6 space-y-3 relative">
           {[
             { id: 'knowledge', icon: Database, label: 'Knowledge Base' },
             { id: 'restaurants', icon: Utensils, label: 'Restaurant Registry' },
@@ -123,18 +129,26 @@ const Admin: React.FC = () => {
             <Search className="w-4 h-4 group-hover:scale-110 transition-transform" />
             Universal Search
           </button>
-        </nav>
+        </nav> */}
 
-        <div className="p-8 border-t border-white/5 bg-black/20">
+        <div className="p-8 border-t border-white/5 bg-black/20 space-y-6">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-2xl bg-gourmet-amber/10 border border-gourmet-amber/30 flex items-center justify-center shadow-inner group">
               <span className="text-gourmet-amber font-black text-lg group-hover:scale-110 transition-transform">{user.name?.substring(0, 2).toUpperCase()}</span>
             </div>
             <div>
               <p className="text-sm font-black text-white serif italic">{user.name}</p>
-              <p className="text-[9px] text-gourmet-amber/60 font-black uppercase tracking-widest">Maître d' Status</p>
+                
             </div>
           </div>
+          
+          <button 
+            onClick={handleLogout}
+            className="w-full flex items-center gap-4 px-6 py-4 rounded-2xl text-xs font-black uppercase tracking-widest text-red-400 border border-red-400/20 hover:bg-red-400/10 hover:border-red-400/40 transition-all duration-300 group"
+          >
+            <LogOut className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            Sign Out
+          </button>
         </div>
       </aside>
 
@@ -146,16 +160,13 @@ const Admin: React.FC = () => {
           <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-16">
             <div className="animate-in fade-in slide-in-from-left-10 duration-700">
               <h1 className="text-5xl font-black text-gourmet-charcoal tracking-tight serif mb-3 italic">
-                {activeTab === 'knowledge' ? 'Knowledge Archive' : activeTab === 'restaurants' ? 'Curated Registry' : 'System Configuration'}
+                {activeTab === 'knowledge' ? 'Admin Dashboard' : activeTab === 'restaurants' ? 'Curated Registry' : 'System Configuration'}
               </h1>
-              <p className="text-gourmet-charcoal/50 serif italic text-lg leading-relaxed">Defining the core essence of the Adama culinary experience.</p>
+              <p className="text-gourmet-charcoal/50 serif italic text-lg leading-relaxed">Defining the core essence of the Adama hospitality experience.</p>
             </div>
             
             <div className="flex gap-4">
-               <div className="glass-card px-6 py-4 rounded-3xl amber-glow flex items-center gap-4">
-                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-gourmet-charcoal">Cluster0 Active</span>
-               </div>
+               {/* Activity indicators reserved for future system metrics */}
             </div>
           </header>
 
@@ -173,9 +184,9 @@ const Admin: React.FC = () => {
                         <Upload className="text-gourmet-charcoal w-10 h-10" />
                       )}
                     </div>
-                    <h3 className="text-3xl font-black text-white mb-4 serif italic">Import New Knowledge</h3>
+                    <h3 className="text-3xl font-black text-white mb-4 serif italic">Import New Hotel Information</h3>
                     <p className="text-gourmet-cream/50 text-base serif italic max-w-md mx-auto mb-12">
-                      Upload PDF or TXT menus, reviews, or historical accounts to evolve the AI's understanding.
+                      Upload PDF or TXT brochures, policy documents, or amenity lists to evolve the AI's understanding.
                     </p>
                     <input type="file" id="file-upload" className="hidden" onChange={handleFileUpload} accept=".pdf,.txt" />
                     <label 
